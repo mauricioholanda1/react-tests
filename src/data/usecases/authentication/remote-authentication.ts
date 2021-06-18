@@ -4,7 +4,7 @@ import {Authentication, AuthenticationParams} from '@/domain/usecases';
 import {AccountModel} from '@/domain/models';
 
 export class RemoteAuthentication implements Authentication {
-  constructor( 
+  constructor(
     private readonly url: string,
     private readonly httpPostClient: HttpPostClient<
       AuthenticationParams,
@@ -20,7 +20,7 @@ export class RemoteAuthentication implements Authentication {
     switch (httpResponse.statusCode) {
       case HttpStatusCode.ok:
         return httpResponse.body;
-      case HttpStatusCode.unathorized:
+      case HttpStatusCode.unauthorized:
         throw new InvalidCredentialsError();
       default:
         throw new UnexpectedError();
